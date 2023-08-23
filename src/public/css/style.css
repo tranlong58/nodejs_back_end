@@ -34,3 +34,17 @@
     background-color: #04AA6D;
     color: white;
 }
+
+.form-add-new-user {
+    width: 500px;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+.form-add-new-user .input-group {
+    padding: 10px;
+}
+
+.form-add-new-user button {
+    margin: 10px;
+}
