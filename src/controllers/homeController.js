@@ -1,6 +1,7 @@
 
 const getHomePage = (req, res) => {
-    res.send('Hello World with nodejs !!!');
+
+    return res.render('home.ejs');
 }
 
 const getABC = (req, res) => {
