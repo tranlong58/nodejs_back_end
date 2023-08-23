@@ -1,0 +1,53 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a class="active" href="/show-user">Show User</a>
+        <a href="/create-user">Create User</a>
+    </div>
+    <div class="table-container">
+        <div id="title-table-user">
+            List Users
+        </div>
+        <table id="table-user">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Action</th>
+            </tr>
+            <% for(var i=0; i < listUsers.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= listUsers[i].id %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].email %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].name %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].city %>
+                    </td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+
+    </div>
+</body>
+
+</html>
