@@ -1,44 +1,58 @@
 const connection = require('../config/database');
-const { getAllUsers, createNewUser } = require('../services/CRUDServices');
+const CRUDServices = require('../services/CRUDServices');
 
-//GET /
-const showHomePage = (req, res) => {
-    return res.render('home.ejs');
+class HomeController {
+    //GET /
+    showHomePage(req, res) {
+        return res.render('home.ejs');
+    }
+
+    //GET /abc
+    getABC(req, res) {
+        res.render('sample.ejs');
+    }
+
+    //GET /show-user
+    async showUser(req, res) {
+        const results = await CRUDServices.getAllUsers();
+
+        res.render('showUser.ejs', { pageName: 'showUser', listUsers: results });
+    }
+
+    //GET /create-user
+    createUser(req, res) {
+        res.render('createUser.ejs', { pageName: 'createUser' });
+    }
+
+    //POST /store-user
+    async storeUser(req, res) {
+        const email = req.body.email;
+        const name = req.body.name;
+        const city = req.body.city;
+
+        await CRUDServices.createNewUser(email, name, city);
+
+        res.redirect('/show-user');
+    }
+
+    //GET /edit-user/:id
+    async editUser(req, res) {
+        const user = await CRUDServices.getUserByID(req.params.id);
+
+        res.render('editUser.ejs', { pageName: '', user: user });
+    }
+
+    //POST /update-user
+    async updateUser(req, res) {
+        const email = req.body.email;
+        const name = req.body.name;
+        const city = req.body.city;
+        const id = req.body.id;
+
+        await CRUDServices.updateUserByID(id, email, name, city);
+
+        res.redirect('/show-user');
+    }
 }
 
-//GET /abc
-const getABC = (req, res) => {
-    res.render('sample.ejs');
-}
-
-//GET /show-user
-const showUser = async (req, res) => {
-    const results = await getAllUsers();
-
-    res.render('showUser.ejs', { listUsers: results });
-}
-
-//GET /create-user
-const createUser = (req, res) => {
-    return res.render('createUser.ejs');
-}
-
-//POST /store-user
-const storeUser = async (req, res) => {
-    const email = req.body.email;
-    const name = req.body.name;
-    const city = req.body.city;
-
-    // const [results, fields] = await connection.query(
-    //     'insert into Users(email, name, city) values(?, ?, ?)',
-    //     [email, name, city]
-    // );
-
-    await createNewUser(email, name, city);
-
-    res.redirect('/');
-}
-
-module.exports = {
-    showHomePage, getABC, showUser, createUser, storeUser
-}
+module.exports = new HomeController

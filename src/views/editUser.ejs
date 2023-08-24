@@ -1,0 +1,29 @@
+<%- include('header.ejs', { pageTitle: 'Edit user page' }) %>
+    <div class="form-create-new-user">
+        <form action="/update-user" method="post">
+            <fieldset>
+                <legend>Edit user</legend>
+                <div class="input-group d-none">
+                    <label>ID: </label>
+                    <input type="text" name="id" value="<%= user.id %>">
+                </div>
+                <div class="input-group">
+                    <label>Email: </label>
+                    <input type="text" name="email" value="<%= user.email %>">
+                </div>
+                <div class="input-group">
+                    <label>Name: </label>
+                    <input type="text" name="name" value="<%= user.name %>">
+                </div>
+                <div class="input-group">
+                    <label>City: </label>
+                    <input type="text" name="city" value="<%= user.city %>">
+                </div>
+                <div>
+                    <button>Save</button>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    <%- include('footer.ejs') %>

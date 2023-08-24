@@ -1,18 +1,4 @@
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="topnav">
-        <a href="/">Home</a>
-        <a class="active" href="/show-user">Show User</a>
-        <a href="/create-user">Create User</a>
-    </div>
+<%- include('header.ejs', { pageTitle: 'Show user page' }) %>
     <div class="table-container">
         <div id="title-table-user">
             List Users
@@ -40,14 +26,16 @@
                         <%= listUsers[i].city %>
                     </td>
                     <td>
-                        <button class="edit-btn">Edit</button>
-                        <button class="delete-btn">Delete</button>
+                        <a href="/edit-user/<%= listUsers[i].id %>" class="link">
+                            <button class="edit-btn">Edit</button>
+                        </a>
+                        <a href="/edit-user" class="link">
+                            <button class="delete-btn">Delete</button>
+                        </a>
                     </td>
                 </tr>
                 <% } %>
         </table>
 
     </div>
-</body>
-
-</html>
+    <%- include('footer.ejs') %>

@@ -1,18 +1,4 @@
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-    <div class="topnav">
-        <a href="/">Home</a>
-        <a href="/show-user">Show User</a>
-        <a class="active" href="/create-user">Create User</a>
-    </div>
+<%- include('header.ejs', { pageTitle: 'Create user page' }) %>
     <div class="form-create-new-user">
         <form action="/store-user" method="post">
             <fieldset>
@@ -36,6 +22,4 @@
         </form>
 
     </div>
-</body>
-
-</html>
+    <%- include('footer.ejs') %>

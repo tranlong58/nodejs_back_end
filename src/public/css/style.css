@@ -7,6 +7,10 @@
     width: 50px;
 }
 
+.d-none {
+    display: none !important;
+}
+
 /* topnav */
 .topnav {
     background-color: #333;
@@ -69,6 +73,11 @@
     color: black;
 }
 
+.link {
+    display: inline-block;
+    margin: 0 10px;
+}
+
 .edit-btn {
     background-color: #4CAF50;
     border: none;
@@ -77,7 +86,6 @@
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin: 0px 10px;
     cursor: pointer;
 }
 
@@ -94,7 +102,6 @@
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin: 0px 10px;
     cursor: pointer;
 }
 
@@ -129,7 +136,8 @@
 
 .form-create-new-user .input-group input {
     font-size: 20px;
-    margin-right: 180px;
+    margin-right: 100px;
+    width: 300px;
 }
 
 .form-create-new-user button {
