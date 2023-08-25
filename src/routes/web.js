@@ -16,4 +16,8 @@ router.post('/store-user', HomeController.storeUser);
 router.get('/edit-user/:id', HomeController.editUser);
 router.post('/update-user', HomeController.updateUser);
 
+//delete a user
+router.post('/delete-user/:id', HomeController.deleteUser);
+
+
 module.exports = router;

@@ -53,6 +53,15 @@ class HomeController {
 
         res.redirect('/show-user');
     }
+
+    //POST /delete-user/:id
+    async deleteUser(req, res) {
+        const id = req.params.id;
+
+        await CRUDServices.deleteUserByID(id);
+
+        res.redirect('/show-user');
+    }
 }
 
 module.exports = new HomeController

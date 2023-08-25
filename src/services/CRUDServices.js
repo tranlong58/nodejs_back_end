@@ -33,6 +33,13 @@ class CRUDServices {
             [email, name, city, id]
         );
     };
+
+    async deleteUserByID(id) {
+        const [results, fields] = await connection.query(
+            'delete from Users where id=?',
+            [id]
+        );
+    };
 }
 
 module.exports = new CRUDServices
