@@ -9,6 +9,15 @@ class HomeControllerAPI {
         res.json(results);
     }
 
+    //GET /show-user/:id
+    async showUserByID(req, res) {
+        const id = req.params.id;
+
+        const results = await CRUDServices.getUserByID(id);
+
+        res.json(results);
+    }
+
     //POST /store-user
     async storeUser(req, res) {
         const email = req.body.email;
