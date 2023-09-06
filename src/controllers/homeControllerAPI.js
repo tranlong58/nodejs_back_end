@@ -24,8 +24,12 @@ class HomeControllerAPI {
         const name = req.body.name;
         const city = req.body.city;
 
-        await CRUDServices.createNewUser(email, name, city);
-        res.json('added a user');
+        const id = await CRUDServices.createNewUser(email, name, city);
+        //res.json('added a user');
+        res.json({
+            message: 'add a user',
+            id: id, //id of new user
+        });
     }
 
     //POST /update-user

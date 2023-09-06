@@ -25,6 +25,8 @@ class CRUDServices {
             'insert into Users(email, name, city) values(?, ?, ?)',
             [email, name, city]
         );
+
+        return results.insertId;
     };
 
     async updateUserByID(id, email, name, city) {
