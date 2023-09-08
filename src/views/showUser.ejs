@@ -30,7 +30,8 @@
                             <button class="edit-btn">Edit</button>
                         </form>
 
-                        <form action="/delete-user/<%= listUsers[i].id %>" method="post" class="link">
+                        <form action="/delete-user" method="post" class="link">
+                            <input name="id" value="<%= listUsers[i].id %>" class="d-none"></input>
                             <button class="delete-btn">Delete</button>
                         </form>
                     </td>

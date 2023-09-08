@@ -54,9 +54,9 @@ class HomeController {
         res.redirect('/show-user');
     }
 
-    //POST /delete-user/:id
+    //POST /delete-user
     async deleteUser(req, res) {
-        const id = req.params.id;
+        const id = req.body.id;
 
         await CRUDServices.deleteUserByID(id);
 

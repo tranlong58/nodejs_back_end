@@ -17,7 +17,7 @@ router.get('/edit-user/:id', HomeController.editUser);
 router.post('/update-user', HomeController.updateUser);
 
 //delete a user
-router.post('/delete-user/:id', HomeController.deleteUser);
+router.post('/delete-user', HomeController.deleteUser);
 
 
 module.exports = router;

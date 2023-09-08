@@ -15,7 +15,10 @@ router.post('/store-user', HomeControllerAPI.storeUser);
 router.post('/update-user', HomeControllerAPI.updateUser);
 
 //delete a user
-router.post('/delete-user/:id', HomeControllerAPI.deleteUser);
+router.post('/delete-user', HomeControllerAPI.deleteUser);
+
+//count user
+router.get('/count-user', HomeControllerAPI.countUser);
 
 
 module.exports = router;

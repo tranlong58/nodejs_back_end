@@ -20,6 +20,15 @@ class CRUDServices {
         return user;
     };
 
+    async getUsersByPage(page) {
+        const offset = (page - 1) * 5;
+        const [results, fields] = await connection.query(
+            'select * from Users limit ?, 5',
+            [offset]
+        );
+        return results;
+    };
+
     async createNewUser(email, name, city) {
         const [results, fields] = await connection.query(
             'insert into Users(email, name, city) values(?, ?, ?)',
@@ -42,6 +51,14 @@ class CRUDServices {
             [id]
         );
     };
+
+    async countUser() {
+        const [results, fields] = await connection.query(
+            'select count(id) as totalUser from Users'
+        );
+
+        return results[0].totalUser;
+    }
 }
 
 module.exports = new CRUDServices
