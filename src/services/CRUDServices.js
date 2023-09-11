@@ -98,6 +98,13 @@ class CRUDServices {
         );
     };
 
+    async deleteCustomerByID(id) {
+        const [results, fields] = await connection.query(
+            'delete from Customers where id=?',
+            [id]
+        );
+    };
+
     async countCustomer() {
         const [results, fields] = await connection.query(
             'select count(id) as totalCustomer from Customers'

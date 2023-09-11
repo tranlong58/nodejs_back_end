@@ -124,6 +124,15 @@ class HomeControllerAPI {
         });
     }
 
+    //DELETE /delete-customer
+    async deleteCustomer(req, res) {
+        const id = req.body.id;
+        await CRUDServices.deleteCustomerByID(id);
+        res.json({
+            message: 'deleted a customer',
+        });
+    }
+
     //GET /count-customer
     async countCustomer(req, res) {
         const results = await CRUDServices.countCustomer();

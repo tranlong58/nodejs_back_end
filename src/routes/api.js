@@ -32,6 +32,9 @@ router.get('/read-customer', HomeControllerAPI.readCustomer);
 //update customer
 router.put('/update-customer', HomeControllerAPI.updateCustomer);
 
+//delete customer
+router.delete('/delete-customer', HomeControllerAPI.deleteCustomer);
+
 //count customer
 router.get('/count-customer', HomeControllerAPI.countCustomer);
 
