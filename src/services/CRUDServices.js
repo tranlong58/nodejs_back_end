@@ -1,6 +1,8 @@
 const connection = require('../config/database');
 
 class CRUDServices {
+
+    //user
     async getAllUsers() {
         const [results, fields] = await connection.query(
             'select * from Users'
@@ -21,9 +23,9 @@ class CRUDServices {
     };
 
     async getUsersByPage(page) {
-        const offset = (page - 1) * 5;
+        const offset = (page - 1) * 10;
         const [results, fields] = await connection.query(
-            'select * from Users limit ?, 5',
+            'select * from Users limit ?, 10',
             [offset]
         );
         return results;
@@ -58,6 +60,50 @@ class CRUDServices {
         );
 
         return results[0].totalUser;
+    }
+
+
+    //customer
+    async createNewCustomer(name, email, pass) {
+        const [results, fields] = await connection.query(
+            'insert into Customers(name, email, pass) values(?, ?, ?)',
+            [name, email, pass]
+        );
+
+        return results.insertId;
+    };
+
+    async readAllCustomer() {
+        const [results, fields] = await connection.query(
+            'select * from Customers'
+        );
+
+        return results;
+    };
+
+    async readCustomersByPage(page) {
+        const offset = (page - 1) * 10;
+        const [results, fields] = await connection.query(
+            'select * from Customers limit ?, 10',
+            [offset]
+        );
+
+        return results;
+    };
+
+    async updateCustomerByID(id, name, email, pass) {
+        const [results, fields] = await connection.query(
+            'update Customers set name=?, email=?, pass=? where id=?',
+            [name, email, pass, id]
+        );
+    };
+
+    async countCustomer() {
+        const [results, fields] = await connection.query(
+            'select count(id) as totalCustomer from Customers'
+        );
+
+        return results[0].totalCustomer;
     }
 }
 
