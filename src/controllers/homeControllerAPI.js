@@ -141,6 +141,70 @@ class HomeControllerAPI {
             totalCustomer: results, //number of customer
         });
     }
+
+    //category
+    //POST /create-category
+    async createCategory(req, res) {
+        const name = req.body.name;
+        const kind = req.body.kind;
+
+        const id = await CRUDServices.createNewCategory(name, kind);
+        //res.json('added a user');
+        res.json({
+            message: 'add a category',
+            id: id, //id of new category
+        });
+    }
+
+    //GET /read-category
+    async readCategory(req, res) {
+        if (req.query.page) {
+            const page = req.query.page;
+
+            const categoryByPage = await CRUDServices.readCategoryByPage(page);
+            const totalCategory = await CRUDServices.countCategory();
+            const totalPage = Math.ceil(totalCategory / 10);
+
+            res.json({
+                categoryByPage: categoryByPage,
+                totalPage: totalPage,
+            });
+        }
+        else {
+            const results = await CRUDServices.readAllCategory();
+            res.json(results);
+        }
+    }
+
+    //PUT /update-category 
+    async updateCategory(req, res) {
+        const id = req.body.id;
+        const name = req.body.name;
+        const kind = req.body.kind;
+
+        await CRUDServices.updateCategoryByID(id, name, kind);
+        res.json({
+            message: 'updated a category',
+        });
+    }
+
+    //DELETE /delete-category
+    async deleteCategory(req, res) {
+        const id = req.body.id;
+        await CRUDServices.deleteCategoryByID(id);
+        res.json({
+            message: 'deleted a category',
+        });
+    }
+
+    //GET /count-category
+    async countCategory(req, res) {
+        const results = await CRUDServices.countCategory();
+        res.json({
+            message: 'count all category',
+            totalCategory: results, //number of category
+        });
+    }
 }
 
 module.exports = new HomeControllerAPI

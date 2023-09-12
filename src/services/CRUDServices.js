@@ -112,6 +112,57 @@ class CRUDServices {
 
         return results[0].totalCustomer;
     }
+
+
+    //category
+    async createNewCategory(name, kind) {
+        const [results, fields] = await connection.query(
+            'insert into Category(name, kind) values(?, ?)',
+            [name, kind]
+        );
+
+        return results.insertId;
+    };
+
+    async readAllCategory() {
+        const [results, fields] = await connection.query(
+            'select * from Category'
+        );
+
+        return results;
+    };
+
+    async readCategoryByPage(page) {
+        const offset = (page - 1) * 10;
+        const [results, fields] = await connection.query(
+            'select * from Category limit ?, 10',
+            [offset]
+        );
+
+        return results;
+    };
+
+    async updateCategoryByID(id, name, kind) {
+        const [results, fields] = await connection.query(
+            'update Category set name=?, kind=? where id=?',
+            [name, kind, id]
+        );
+    };
+
+    async deleteCategoryByID(id) {
+        const [results, fields] = await connection.query(
+            'delete from Category where id=?',
+            [id]
+        );
+    };
+
+    async countCategory() {
+        const [results, fields] = await connection.query(
+            'select count(id) as totalCategory from Category'
+        );
+
+        return results[0].totalCategory;
+    }
 }
 
 module.exports = new CRUDServices

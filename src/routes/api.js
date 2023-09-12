@@ -39,5 +39,20 @@ router.delete('/delete-customer', HomeControllerAPI.deleteCustomer);
 router.get('/count-customer', HomeControllerAPI.countCustomer);
 
 
+//category
+//create a category
+router.post('/create-category', HomeControllerAPI.createCategory);
+
+//read category all or by page
+router.get('/read-category', HomeControllerAPI.readCategory);
+
+//update category
+router.put('/update-category', HomeControllerAPI.updateCategory);
+
+//delete category
+router.delete('/delete-category', HomeControllerAPI.deleteCategory);
+
+//count category
+router.get('/count-category', HomeControllerAPI.countCategory);
 
 module.exports = router;
