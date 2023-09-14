@@ -205,6 +205,66 @@ class HomeControllerAPI {
             totalCategory: results, //number of category
         });
     }
+
+
+    //transaction
+    //POST /create-transaction
+    async createTransaction(req, res) {
+        const customer_id = req.body.customer_id;
+        const category_id = req.body.category_id;
+        const amount = req.body.amount;
+        const detail = req.body.detail;
+        const date_created = req.body.date_created;
+
+        const id = await CRUDServices.createNewTransaction(customer_id, category_id, amount, detail, date_created);
+
+        res.json({
+            message: 'add a transaction',
+            id: id, //id of new transaction
+        });
+    }
+
+    //GET /read-transaction
+    async readTransaction(req, res) {
+        if (req.query.month && req.query.year) {
+            const month = req.query.month;
+            const year = req.query.year;
+
+            const transactionByMonth = await CRUDServices.readTransactionByMonth(month, year);
+
+            res.json({
+                transactionByMonth: transactionByMonth,
+            });
+        }
+        else {
+            const results = await CRUDServices.readAllTransaction();
+            res.json(results);
+        }
+    }
+
+    //PUT /update-transaction 
+    async updateTransaction(req, res) {
+        const id = req.body.id;
+        const customer_id = req.body.customer_id;
+        const category_id = req.body.category_id;
+        const amount = req.body.amount;
+        const detail = req.body.detail;
+        const date_created = req.body.date_created;
+
+        await CRUDServices.updateTransactionByID(id, customer_id, category_id, amount, detail, date_created);
+        res.json({
+            message: 'updated a transaction',
+        });
+    }
+
+    //DELETE /delete-transaction
+    async deleteTransaction(req, res) {
+        const id = req.body.id;
+        await CRUDServices.deleteTransactionByID(id);
+        res.json({
+            message: 'deleted a transaction',
+        });
+    }
 }
 
 module.exports = new HomeControllerAPI

@@ -163,6 +163,47 @@ class CRUDServices {
 
         return results[0].totalCategory;
     }
+
+    //transaction
+    async createNewTransaction(customer_id, category_id, amount, detail, date_created) {
+        const [results, fields] = await connection.query(
+            'insert into Transactions(customer_id, category_id, amount, detail, date_created) values (?, ?, ?, ?, ?)',
+            [customer_id, category_id, amount, detail, date_created]
+        );
+
+        return results.insertId;
+    };
+
+    async readAllTransaction() {
+        const [results, fields] = await connection.query(
+            `select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions`
+        );
+
+        return results;
+    };
+
+    async readTransactionByMonth(month, year) {
+        const [results, fields] = await connection.query(
+            `select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions where month(date_created) = ? and year(date_created) = ?`,
+            [month, year]
+        );
+
+        return results;
+    };
+
+    async updateTransactionByID(id, customer_id, category_id, amount, detail, date_created) {
+        const [results, fields] = await connection.query(
+            'update Transactions set customer_id=?, category_id=?, amount=?, detail=?, date_created=? where id=?',
+            [customer_id, category_id, amount, detail, date_created, id]
+        );
+    };
+
+    async deleteTransactionByID(id) {
+        const [results, fields] = await connection.query(
+            'delete from Transactions where id=?',
+            [id]
+        );
+    };
 }
 
 module.exports = new CRUDServices

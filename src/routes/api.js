@@ -26,7 +26,7 @@ router.get('/count-user', HomeControllerAPI.countUser);
 //create a customer
 router.post('/create-customer', HomeControllerAPI.createCustomer);
 
-//read customer all or by page
+//read all customer or by page
 router.get('/read-customer', HomeControllerAPI.readCustomer);
 
 //update customer
@@ -43,7 +43,7 @@ router.get('/count-customer', HomeControllerAPI.countCustomer);
 //create a category
 router.post('/create-category', HomeControllerAPI.createCategory);
 
-//read category all or by page
+//read all category or by page
 router.get('/read-category', HomeControllerAPI.readCategory);
 
 //update category
@@ -54,5 +54,19 @@ router.delete('/delete-category', HomeControllerAPI.deleteCategory);
 
 //count category
 router.get('/count-category', HomeControllerAPI.countCategory);
+
+
+//transaction
+//create a transaction
+router.post('/create-transaction', HomeControllerAPI.createTransaction);
+
+//read all transaction or by month
+router.get('/read-transaction', HomeControllerAPI.readTransaction);
+
+//update transaction
+router.put('/update-transaction', HomeControllerAPI.updateTransaction);
+
+//delete transaction
+router.delete('/delete-transaction', HomeControllerAPI.deleteTransaction);
 
 module.exports = router;
