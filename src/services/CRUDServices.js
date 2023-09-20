@@ -176,7 +176,11 @@ class CRUDServices {
 
     async readAllTransaction() {
         const [results, fields] = await connection.query(
-            `select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions`
+            //`select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions`
+            `select Transactions.id, customer_id, category_id, name as category_name, kind as category_kind, amount, detail, date_created, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format 
+            from Transactions, Category 
+            where Transactions.category_id = Category.id
+            order by date_created desc`,
         );
 
         return results;
@@ -184,7 +188,12 @@ class CRUDServices {
 
     async readTransactionByMonth(month, year) {
         const [results, fields] = await connection.query(
-            `select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions where month(date_created) = ? and year(date_created) = ?`,
+            //`select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions where month(date_created) = ? and year(date_created) = ?`,
+            //`select *, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format from Transactions, Category where month(date_created) = ? and year(date_created) = ? and Transactions.category_id = Category.id `,
+            `select Transactions.id, customer_id, category_id, name as category_name, kind as category_kind, amount, detail, date_created, DATE_FORMAT(date_created, '%d-%m-%Y') as date_created_format 
+            from Transactions, Category 
+            where month(date_created) = ? and year(date_created) = ? and Transactions.category_id = Category.id
+            order by date_created desc`,
             [month, year]
         );
 
